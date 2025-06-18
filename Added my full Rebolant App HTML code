@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rebolant App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f0f4f8;
+      padding: 20px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .btn, .form-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 20px;
+      margin: 10px auto;
+      display: block;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 200px;
+    }
+
+    .input-group {
+      margin: 15px auto;
+      width: 80%;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .message {
+      color: green;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Welcome Page -->
+  <div class="page active" id="welcomePage">
+    <h1>Welcome to Rebolant</h1>
+    <button class="btn" onclick="showPage('loginPage')">Login</button>
+    <button class="btn" onclick="showPage('registerPage')">Register</button>
+  </div>
+
+  <!-- Login Page -->
+  <div class="page" id="loginPage">
+    <div class="container">
+      <h2>Login</h2>
+      <div class="input-group">
+        <label>Email:</label>
+        <input type="email" id="loginEmail" />
+      </div>
+      <div class="input-group">
+        <label>Password:</label>
+        <input type="password" id="loginPassword" />
+      </div>
+      <button class="form-btn" onclick="loginUser()">Login</button>
+      <button class="btn" onclick="showPage('welcomePage')">← Back</button>
+    </div>
+  </div>
+
+  <!-- Register Page -->
+  <div class="page" id="registerPage">
+    <div class="container">
+      <h2>Register</h2>
+      <div class="input-group">
+        <label>Full Name:</label>
+        <input type="text" id="regName" />
+      </div>
+      <div class="input-group">
+        <label>Email:</label>
+        <input type="email" id="regEmail" />
+      </div>
+      <div class="input-group">
+        <label>Password:</label>
+        <input type="password" id="regPassword" />
+      </div>
+      <button class="form-btn" onclick="registerUser()">Register</button>
+      <button class="btn" onclick="showPage('welcomePage')">← Back</button>
+    </div>
+  </div>
+
+  <!-- Dashboard Page -->
+  <div class="page" id="dashboardPage">
+    <h2>Welcome to Rebolant Dashboard!</h2>
+    <p class="message">You are now logged in. 🎉</p>
+    <button class="btn" onclick="showPage('welcomePage')">Logout</button>
+  </div>
+
+  <script>
+    function showPage(pageId) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+    }
+
+    function loginUser() {
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+
+      if (email && password) {
+        showPage('dashboardPage');
+      } else {
+        alert("Please enter email and password.");
+      }
+    }
+
+    function registerUser() {
+      const name = document.getElementById("regName").value;
+      const email = document.getElementById("regEmail").value;
+      const password = document.getElementById("regPassword").value;
+
+      if (name && email && password) {
+        alert("Registered successfully! Now login.");
+        showPage('loginPage');
+      } else {
+        alert("Please fill all fields.");
+      }
+    }
+  </script>
+
+</body>
+  </html>
